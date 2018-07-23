@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import ButtonContainer from './container/ButtonContainer';
+import HourContainer from './container/HourContainer';
 
 class App extends Component {
   render() {
     return (
-      <ButtonContainer />
+      <HourContainer />
     );
   }
 }
