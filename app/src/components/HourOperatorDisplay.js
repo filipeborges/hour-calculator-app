@@ -10,12 +10,19 @@ const generateCss = function(textColor) {
     return Object.assign({}, css, colorCss);
 };
 
-const HourDisplay = function(props) {
+const generateContainerCss = function(customCss) {
+    let css = {
+        display: 'inline-block'
+    };
+    return Object.assign({}, css, customCss);
+};
+
+export const HourDisplay = function(props) {
     return (
-        <div>
+        <div style={ generateContainerCss(props.containerCss)  }>
             <span style={generateCss(props.textColor)}>{props.text}</span>
         </div>
     );
 };
 
-export default HourDisplay;
+export const OperatorDisplay = HourDisplay;

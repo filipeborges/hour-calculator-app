@@ -1,5 +1,5 @@
 import React from 'react';
-import HourGroup from '../components/HourGroup';
+import HourTable from '../components/HourTable';
 
 const getSecondHourColor = function(isOperatorInputted, isSumOperator) {
 
@@ -25,17 +25,29 @@ const getOperationResult = function() {
     return '13:33';
 }
 
+const getOperator = function() {
+    //TODO: Read value from Store property;
+    return '+';
+}
+
+const isEqualVisible = function() {
+    //TODO: Implement
+    return true;
+}
+
 const HourContainer = function() {
 
     //TODO: Read this values from Store property.
-    let isSumOperation = true;
+    let isSumOperation = false;
     let isOperatorInputted = false;
 
     return (
-        <HourGroup 
+        <HourTable 
             firstOperand={getFirstHourOperand()}
             secondOperand={getSecondHourOperand()}
-            secondOperandColor={getSecondHourColor()}
+            secondOperandColor={getSecondHourColor(isOperatorInputted, isSumOperation)}
+            operator={getOperator()}
+            isEqualVisible={isEqualVisible()}
             result={getOperationResult()}
          />
     );

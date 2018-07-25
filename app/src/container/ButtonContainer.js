@@ -13,9 +13,15 @@ const getButtonRow = function(buttonTextRow) {
     );
 };
 
+const containerCss = {
+    width: '152px',
+    marginRight: 'auto',
+    marginLeft: 'auto'
+}
+
 const ButtonContainer = function(props) {
     return (
-        <div>
+        <div style={containerCss}>
             { getButtonRow(['1','2','3']) }
             { getButtonRow(['4','5','6']) }
             { getButtonRow(['7','8','9']) }
