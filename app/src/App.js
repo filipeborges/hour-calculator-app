@@ -8,9 +8,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <HourContainer />
+        <HourContainer store={this.props.store} />
         <br/>
-        <ButtonContainer />
+        <ButtonContainer store={this.props.store} />
       </div>
     );
   }

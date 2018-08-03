@@ -34,7 +34,7 @@ const handleInputtedNumber = function(currentState, inputValue) {
 
     if(firstOperandReceivesValue) {
         
-        newOperandValue = currentState.firstOperandValue.length == 2 ?
+        newOperandValue = currentState.firstOperandValue.length === 2 ?
             currentState.firstOperandValue + ':' + inputValue :
             currentState.firstOperandValue + inputValue;
 
@@ -42,7 +42,7 @@ const handleInputtedNumber = function(currentState, inputValue) {
 
     } else if(secondOperandReceivesValue) {
         
-        newOperandValue = currentState.secondOperandValue.length == 2 ?
+        newOperandValue = currentState.secondOperandValue.length === 2 ?
             currentState.secondOperandValue + ':' + inputValue :
             currentState.secondOperandValue + inputValue;
 

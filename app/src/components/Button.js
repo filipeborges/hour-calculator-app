@@ -8,7 +8,7 @@ const css = {
 
 const Button = function(props) {
     return (
-        <button style={css}>
+        <button onClick={props.onClick} style={css}>
             {props.text}
         </button>
     );

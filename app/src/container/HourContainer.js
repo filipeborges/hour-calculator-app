@@ -1,33 +1,9 @@
 import React from 'react';
 import HourTable from '../components/HourTable';
 
-const getSecondHourColor = function(isOperatorInputted, isSumOperator) {
-
-    if(isOperatorInputted) {
-        return isSumOperator ? 'green' : 'red';
-    } else {
-        return undefined;
-    }
-}
-
-const getFirstHourOperand = function() {
-    //TODO: Read value from Store property;
-    return '14:35';
-}
-
-const getSecondHourOperand = function() {
-    //TODO: Read value from Store property;
-    return '22:34';
-}
-
 const getOperationResult = function() {
     //TODO: Process the operation;
     return '13:33';
-}
-
-const getOperator = function() {
-    //TODO: Read value from Store property;
-    return '+';
 }
 
 const isEqualVisible = function() {
@@ -35,22 +11,77 @@ const isEqualVisible = function() {
     return true;
 }
 
-const HourContainer = function() {
+class HourContainer extends React.Component {
 
-    //TODO: Read this values from Store property.
-    let isSumOperation = false;
-    let isOperatorInputted = false;
+    constructor(props) {
+        super(props);
+        this.state = {
+            firstOperandValue: '',
+            secondOperandValue: '',
+            isSumOperation: false,
+            isOperatorInputted: false
+        };
 
-    return (
-        <HourTable 
-            firstOperand={getFirstHourOperand()}
-            secondOperand={getSecondHourOperand()}
-            secondOperandColor={getSecondHourColor(isOperatorInputted, isSumOperation)}
-            operator={getOperator()}
-            isEqualVisible={isEqualVisible()}
-            result={getOperationResult()}
-         />
-    );
-};
+        this.props.store.subscribe(this.getStoreUpdateCallback());
+    }
+
+    getSecondHourColor(isOperatorInputted, isSumOperator) {
+        if(isOperatorInputted) {
+            return isSumOperator ? 'green' : 'red';
+        } else {
+            return undefined;
+        }
+    }
+
+    getStoreUpdateCallback() {
+        return (
+            function() {
+                let store = this.props.store.getState();
+
+                this.setState({
+                    firstOperandValue: store.firstOperandValue,
+                    secondOperandValue: store.secondOperandValue,
+                    isSumOperation: store.isSumOperation,
+                    isOperatorInputted: store.isOperatorInputted
+                });
+            }
+        ).bind(this);
+    }
+
+    getOperator(isOperatorInputted, isSumOperator) {
+        if(isOperatorInputted) {
+            if(isSumOperator) {
+                return '+';
+            } else {
+                return '-';
+            }
+        } else {
+            return undefined;
+        }
+    }
+
+    render() {
+
+        let secondRowColor = this.getSecondHourColor(
+            this.state.isOperatorInputted, 
+            this.state.isSumOperation
+        );
+
+        return (
+            <HourTable 
+                firstOperand={this.state.firstOperandValue}
+                secondOperand={this.state.secondOperandValue}
+                secondRowColor={secondRowColor}
+                operator={this.getOperator(
+                    this.state.isOperatorInputted,
+                    this.state.isSumOperation
+                )}
+                isEqualVisible={isEqualVisible()}
+                result={getOperationResult()}
+            />
+        );
+    }
+
+}
 
 export default HourContainer;

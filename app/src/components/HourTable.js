@@ -29,11 +29,13 @@ const HourTable = function(props) {
                 </tr>
                 <tr>
                     <td>
-                        <OperatorDisplay text={props.operator} />
+                        <OperatorDisplay text={props.operator}
+                            textColor={props.secondRowColor} 
+                        />
                     </td>
                     <td>
                         <HourDisplay text={props.secondOperand} 
-                            textColor={props.secondOperandColor}
+                            textColor={props.secondRowColor}
                         />
                     </td>
                 </tr>
