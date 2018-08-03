@@ -1,6 +1,6 @@
 import { createStore } from 'redux';
 import Actions from './Actions';
-import Constants from '../constants/constants';
+import Constants from '../utils/constants';
 
 const initialState = {
     firstOperandValue: '',
