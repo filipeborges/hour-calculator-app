@@ -1,14 +1,10 @@
 import React from 'react';
 import HourTable from '../components/HourTable';
+import Constants from '../constants/constants';
 
 const getOperationResult = function() {
     //TODO: Process the operation;
     return '13:33';
-}
-
-const isEqualVisible = function() {
-    //TODO: Implement
-    return true;
 }
 
 class HourContainer extends React.Component {
@@ -60,6 +56,11 @@ class HourContainer extends React.Component {
         }
     }
 
+    isEqualVisible(currentState) {
+        return Constants.VALID_HOUR_REGEX.test(currentState.secondOperandValue) &&
+            currentState.isOperatorInputted;
+    }
+
     render() {
 
         let secondRowColor = this.getSecondHourColor(
@@ -76,7 +77,7 @@ class HourContainer extends React.Component {
                     this.state.isOperatorInputted,
                     this.state.isSumOperation
                 )}
-                isEqualVisible={isEqualVisible()}
+                isEqualVisible={this.isEqualVisible(this.state)}
                 result={getOperationResult()}
             />
         );

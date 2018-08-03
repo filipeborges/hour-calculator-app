@@ -1,17 +1,6 @@
 import { createStore } from 'redux';
 import Actions from './Actions';
-
-    //TODO: Implement
-    /*
-        - Some place needs to subscribe to store update;
-        - This place which subscribed will be responsible for
-        get the 'currentOperandValue' from the store, and check if this value
-        needs to go to 'firstOperandValue' or 'secondOperandValue'.
-        - This place will have access to all store state, so it can do
-        this behavior.
-        - This place needs to clean the 'currentOperandValue' if 
-        the fifth number is inputted.
-    */
+import Constants from '../constants/constants';
 
 const initialState = {
     firstOperandValue: '',
@@ -20,12 +9,20 @@ const initialState = {
     isOperatorInputted: false
 };
 
+
+const isAllowedInputOnFirstOperand = function(currentState) {
+    return !Constants.VALID_HOUR_REGEX.test(currentState.firstOperandValue);
+};
+
+const isAllowedInputOnSecondOperand = function(currentState) {
+    return !Constants.VALID_HOUR_REGEX.test(currentState.secondOperandValue) &&
+        currentState.isOperatorInputted;
+};
+
 const handleInputtedNumber = function(currentState, inputValue) {
 
-    let validHourRegex = /^\d{2}:\d{2}$/;
-
-    let firstOperandReceivesValue = !validHourRegex.test(currentState.firstOperandValue);
-    let secondOperandReceivesValue = !validHourRegex.test(currentState.secondOperandValue);
+    let firstOperandReceivesValue = isAllowedInputOnFirstOperand(currentState);
+    let secondOperandReceivesValue = isAllowedInputOnSecondOperand(currentState);
 
     let stateToReturn = firstOperandReceivesValue || secondOperandReceivesValue ?
         Object.assign({}, currentState) : currentState;
