@@ -30,8 +30,7 @@ class HourContainer extends React.Component {
             if(currentState.isSumOperation) {
                 return getHourStrFromMillis(firstOperandMillis + secondOperandMillis);
             } else {
-                //TODO: Implement
-                return getHourStrFromMillis(firstOperandMillis + secondOperandMillis);
+                return getHourStrFromMillis(firstOperandMillis - secondOperandMillis);
             }
             
         }
