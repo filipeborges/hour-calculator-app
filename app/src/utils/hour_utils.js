@@ -48,20 +48,14 @@ const getHourFraction = function(hourStr) {
     return getTimeFraction(hourStr, isHourFraction);
 };
 
-const getStrFraction = function(integerFraction) {
-    return integerFraction < 10 ? '0' + integerFraction :
-        integerFraction + '';
-}
-
 const getHourStrFromMillis = function(millis) {
-    let date = new Date(millis);
+    let date = new Date(0);
+    let timezoneOffsetMinutes = date.getTimezoneOffset();
+    let timezoneOffsetMillis = timezoneOffsetMinutes * 60 * 1000;
 
-    let hourTimeZoneCorrection = date.getTimezoneOffset() / 60;
+    date = new Date(millis + timezoneOffsetMillis);
 
-    let hourFraction = getStrFraction(date.getHours() + hourTimeZoneCorrection);
-    let minuteFraction = getStrFraction(date.getMinutes());
-
-    return hourFraction + ':' + minuteFraction;
+    return (date.toTimeString()).substring(0, 5);
 }
 
 export { getDateFromHour, getHourStrFromMillis };
