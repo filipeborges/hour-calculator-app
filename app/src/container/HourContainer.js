@@ -2,6 +2,7 @@ import React from 'react';
 import HourTable from '../components/HourTable';
 import Constants from '../utils/constants';
 import { getDateFromHour, getHourStrFromMillis } from '../utils/hour_utils';
+import { getFormattedDateStr } from '../utils/date_utils';
 
 class HourContainer extends React.Component {
 
@@ -78,6 +79,20 @@ class HourContainer extends React.Component {
             currentState.isOperatorInputted;
     }
 
+    getFirstDate(currentState) {
+        let firstOperandComplete = Constants.VALID_HOUR_REGEX
+            .test(currentState.firstOperandValue);
+        
+        if(firstOperandComplete) {
+            let date = new Date();
+            
+            return getFormattedDateStr(date.getDate(), date.getMonth() + 1, 
+                date.getFullYear());
+        }
+
+        return '';
+    }
+
     render() {
 
         let secondRowColor = this.getSecondHourColor(
@@ -96,6 +111,8 @@ class HourContainer extends React.Component {
                 )}
                 isEqualVisible={this.isEqualVisible(this.state)}
                 result={this.getOperationResult(this.state)}
+                firstDate={this.getFirstDate(this.state)}
+                resultDate="(22/09/1990)"
             />
         );
     }

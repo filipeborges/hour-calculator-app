@@ -1,5 +1,6 @@
 import React from 'react';
 import { HourDisplay, OperatorDisplay } from './HourOperatorDisplay';
+import DateDisplay from './DateDisplay';
 
 const hrCss = {
     height: '2px',
@@ -26,6 +27,9 @@ const HourTable = function(props) {
                     <td>
                         <HourDisplay text={props.firstOperand} />
                     </td>
+                    <td>
+                        <DateDisplay dateStr={props.firstDate} />
+                    </td>
                 </tr>
                 <tr>
                     <td>
@@ -38,6 +42,7 @@ const HourTable = function(props) {
                             textColor={props.secondRowColor}
                         />
                     </td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td colSpan='2'><hr style={hrCss}/></td>
@@ -48,6 +53,9 @@ const HourTable = function(props) {
                     </td>
                     <td>
                         <HourDisplay text={props.result} textColor="blue" />
+                    </td>
+                    <td>
+                        <DateDisplay dateStr={props.resultDate} textColor="blue" />
                     </td>
                 </tr>
             </tbody>
