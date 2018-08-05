@@ -1,14 +1,35 @@
 import { createStore } from 'redux';
 import Actions from './Actions';
 import Constants from '../utils/constants';
+import { getDateFromHour } from '../utils/hour_utils';
 
 const initialState = {
     firstOperandValue: '',
     secondOperandValue: '',
     isSumOperation: false,
-    isOperatorInputted: false
+    isOperatorInputted: false,
+    resultDate: undefined
 };
 
+const getResultDate = function(currentState) {
+
+    let firstOperandMillis = getDateFromHour(currentState.firstOperandValue)
+        .getTime();
+    let secondOperandMillis = getDateFromHour(currentState.secondOperandValue)
+        .getTime();
+
+    let date = new Date();
+    date.setHours(0,0,0,0);
+    date.setTime(date.getTime() + firstOperandMillis);
+    
+    if(currentState.isSumOperation) {
+        date.setTime(date.getTime() + secondOperandMillis);
+    } else {
+        date.setTime(date.getTime() - secondOperandMillis);
+    }
+    
+    return date;
+};
 
 const isAllowedInputOnFirstOperand = function(currentState) {
     return !Constants.VALID_HOUR_REGEX.test(currentState.firstOperandValue);
@@ -19,12 +40,18 @@ const isAllowedInputOnSecondOperand = function(currentState) {
         currentState.isOperatorInputted;
 };
 
+const isReadyToCalcultateResult = function(updatedState) {
+    return Constants.VALID_HOUR_REGEX.test(updatedState.firstOperandValue) &&
+        Constants.VALID_HOUR_REGEX.test(updatedState.secondOperandValue) &&
+        !updatedState.resultDate;
+};
+
 const handleInputtedNumber = function(currentState, inputValue) {
 
     let firstOperandReceivesValue = isAllowedInputOnFirstOperand(currentState);
     let secondOperandReceivesValue = isAllowedInputOnSecondOperand(currentState);
 
-    let stateToReturn = firstOperandReceivesValue || secondOperandReceivesValue ?
+    let stateToReturn = firstOperandReceivesValue || secondOperandReceivesValue ? 
         Object.assign({}, currentState) : currentState;
 
     let newOperandValue;
@@ -44,6 +71,10 @@ const handleInputtedNumber = function(currentState, inputValue) {
             currentState.secondOperandValue + inputValue;
 
         stateToReturn.secondOperandValue = newOperandValue;
+
+        if(isReadyToCalcultateResult(stateToReturn)) {
+            stateToReturn.resultDate = getResultDate(stateToReturn);
+        }        
     }
 
     return stateToReturn;

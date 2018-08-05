@@ -1,7 +1,7 @@
 import React from 'react';
 import HourTable from '../components/HourTable';
 import Constants from '../utils/constants';
-import { getDateFromHour, getHourStrFromMillis } from '../utils/hour_utils';
+import { getHourStrFromMillis } from '../utils/hour_utils';
 import { getFormattedDateStr } from '../utils/date_utils';
 
 class HourContainer extends React.Component {
@@ -12,7 +12,8 @@ class HourContainer extends React.Component {
             firstOperandValue: '',
             secondOperandValue: '',
             isSumOperation: false,
-            isOperatorInputted: false
+            isOperatorInputted: false,
+            resultDate: undefined
         };
 
         this.props.store.subscribe(this.getStoreUpdateCallback());
@@ -20,22 +21,10 @@ class HourContainer extends React.Component {
 
     getOperationResult(currentState) {
 
-        let isTimeToCalculateResult = this.isEqualVisible(currentState);
-
-        if(isTimeToCalculateResult) {
-            let firstOperandMillis = getDateFromHour(currentState.firstOperandValue)
-                .getTime();
-            let secondOperandMillis = getDateFromHour(currentState.secondOperandValue)
-                .getTime();
-
-            if(currentState.isSumOperation) {
-                return getHourStrFromMillis(firstOperandMillis + secondOperandMillis);
-            } else {
-                return getHourStrFromMillis(firstOperandMillis - secondOperandMillis);
-            }
-            
+        if(currentState.resultDate) {
+            return getHourStrFromMillis(currentState.resultDate.getTime());
         }
-
+        
         return undefined;
     }
 
@@ -56,7 +45,8 @@ class HourContainer extends React.Component {
                     firstOperandValue: store.firstOperandValue,
                     secondOperandValue: store.secondOperandValue,
                     isSumOperation: store.isSumOperation,
-                    isOperatorInputted: store.isOperatorInputted
+                    isOperatorInputted: store.isOperatorInputted,
+                    resultDate: store.resultDate
                 });
             }
         ).bind(this);
@@ -86,11 +76,19 @@ class HourContainer extends React.Component {
         if(firstOperandComplete) {
             let date = new Date();
             
-            return getFormattedDateStr(date.getDate(), date.getMonth() + 1, 
+            return getFormattedDateStr(date.getDate(), date.getMonth(), 
                 date.getFullYear());
         }
 
         return '';
+    }
+
+    getResultDate(currentState) {
+        return currentState.resultDate !== undefined ? getFormattedDateStr(
+            currentState.resultDate.getDate(),
+            currentState.resultDate.getMonth(),
+            currentState.resultDate.getFullYear()
+        ) : currentState.resultDate;
     }
 
     render() {
@@ -112,7 +110,7 @@ class HourContainer extends React.Component {
                 isEqualVisible={this.isEqualVisible(this.state)}
                 result={this.getOperationResult(this.state)}
                 firstDate={this.getFirstDate(this.state)}
-                resultDate="(22/09/1990)"
+                resultDate={this.getResultDate(this.state)}
             />
         );
     }

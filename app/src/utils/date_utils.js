@@ -7,7 +7,7 @@ const getFormattedDateStr = function(dateDay, dateMonth, dateFullYear) {
 
             return '(' +
                 getTwoDigitNumberStr(dateDay) + '/' +
-                getTwoDigitNumberStr(dateMonth) + '/' +
+                getTwoDigitNumberStr(dateMonth + 1) + '/' +
                 dateFullYear +
             ')';
     } else {

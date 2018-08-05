@@ -50,11 +50,7 @@ const getHourFraction = function(hourStr) {
 
 const getHourStrFromMillis = function(millis) {
     let date = new Date(0);
-    let timezoneOffsetMinutes = date.getTimezoneOffset();
-    let timezoneOffsetMillis = timezoneOffsetMinutes * 60 * 1000;
-
-    date = new Date(millis + timezoneOffsetMillis);
-
+    date = new Date(millis);
     return (date.toTimeString()).substring(0, 5);
 }
 
