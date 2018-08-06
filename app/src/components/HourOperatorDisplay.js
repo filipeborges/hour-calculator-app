@@ -3,7 +3,7 @@ import Constants from '../utils/constants';
 
 const generateCss = function(textColor) {
     let css = {
-        fontSize: '3.5em',
+        fontSize: '3.2em',
         fontWeight: 'bold'
     };
     let colorCss = { color: textColor };
