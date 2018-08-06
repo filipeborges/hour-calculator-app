@@ -3,7 +3,7 @@ import Button from '../components/Button';
 import { addNumber, addOperator } from '../actions/action_creators';
 
 const containerCss = {
-    width: '152px',
+    width: '10.2em',
     marginRight: 'auto',
     marginLeft: 'auto'
 }

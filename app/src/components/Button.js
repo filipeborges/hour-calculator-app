@@ -1,8 +1,8 @@
 import React from 'react';
 
 const css = {
-    width: '50px',
-    height: '50px',
+    width: '1.7em',
+    height: '1.7em',
     fontSize: '2em'
 };
 
