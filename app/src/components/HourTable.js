@@ -18,6 +18,10 @@ const HourTable = function(props) {
     let equalElement = props.isEqualVisible ? 
         <OperatorDisplay text={'='} containerCss={{ float: 'left' }} /> : undefined;
 
+
+    let line = props.isLineVisible ?
+        <hr style={hrCss}/> : undefined;
+
     return (
         <table style={tableCss}>
             <thead />
@@ -45,7 +49,7 @@ const HourTable = function(props) {
                     <td></td>
                 </tr>
                 <tr>
-                    <td colSpan='2'><hr style={hrCss}/></td>
+                    <td colSpan='2'>{line}</td>
                 </tr>
                 <tr>
                     <td>

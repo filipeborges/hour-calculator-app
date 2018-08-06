@@ -111,6 +111,7 @@ class HourContainer extends React.Component {
                 result={this.getOperationResult(this.state)}
                 firstDate={this.getFirstDate(this.state)}
                 resultDate={this.getResultDate(this.state)}
+                isLineVisible={this.isEqualVisible(this.state)}
             />
         );
     }
