@@ -15,7 +15,7 @@ class ButtonContainer extends React.Component {
         let row = [];
         buttonTextRow.forEach(buttonText => {
             row.push(
-                <Button text={buttonText} 
+                <Button key={buttonText} text={buttonText} 
                     onClick={() => this.onClick(buttonText)} 
                 />
             );

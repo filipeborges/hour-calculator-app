@@ -1,4 +1,5 @@
 import React from 'react';
+import Constants from '../utils/constants';
 
 const generateCss = function(textColor) {
     let css = {
@@ -20,7 +21,9 @@ const generateContainerCss = function(customCss) {
 export const HourDisplay = function(props) {
     return (
         <div style={ generateContainerCss(props.containerCss)  }>
-            <span style={generateCss(props.textColor)}>{props.text}</span>
+            <span style={generateCss(props.textColor)}>
+                {props.text ? props.text : Constants.WHITE_SPACE_CHAR}
+            </span>
         </div>
     );
 };
