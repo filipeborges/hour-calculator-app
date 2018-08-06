@@ -29,10 +29,13 @@ const HourTable = function(props) {
                 <tr>
                     <td></td>
                     <td>
-                        <HourDisplay text={props.firstOperand} />
-                    </td>
-                    <td>
                         <DateDisplay dateStr={props.firstDate} />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <HourDisplay text={props.firstOperand} />
                     </td>
                 </tr>
                 <tr>
@@ -46,7 +49,6 @@ const HourTable = function(props) {
                             textColor={props.secondRowColor}
                         />
                     </td>
-                    <td></td>
                 </tr>
                 <tr>
                     <td colSpan='2'>{line}</td>
@@ -58,6 +60,9 @@ const HourTable = function(props) {
                     <td>
                         <HourDisplay text={props.result} textColor="blue" />
                     </td>
+                </tr>
+                <tr>
+                    <td></td>
                     <td>
                         <DateDisplay dateStr={props.resultDate} textColor="blue" />
                     </td>
