@@ -98,6 +98,8 @@ class HourContainer extends React.Component {
             this.state.isSumOperation
         );
 
+        let isEqualVisible = this.isEqualVisible(this.state);
+
         return (
             <HourTable 
                 firstOperand={this.state.firstOperandValue}
@@ -107,11 +109,11 @@ class HourContainer extends React.Component {
                     this.state.isOperatorInputted,
                     this.state.isSumOperation
                 )}
-                isEqualVisible={this.isEqualVisible(this.state)}
+                isEqualVisible={isEqualVisible}
                 result={this.getOperationResult(this.state)}
                 firstDate={this.getFirstDate(this.state)}
                 resultDate={this.getResultDate(this.state)}
-                isLineVisible={this.isEqualVisible(this.state)}
+                isLineVisible={isEqualVisible}
             />
         );
     }

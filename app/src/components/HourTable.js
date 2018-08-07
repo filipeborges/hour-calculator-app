@@ -1,16 +1,19 @@
 import React from 'react';
 import { HourDisplay, OperatorDisplay } from './HourOperatorDisplay';
 import DateDisplay from './DateDisplay';
+import Button from './Button';
 
 const hrCss = {
     height: '2px',
     backgroundColor: '#000'
 };
 
-const tableCss = {
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    paddingRight: '20px'
+const getTableCss = function(isClearButtonVisible) {
+    return {
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        paddingRight: isClearButtonVisible ? undefined : '20px'
+    };
 };
 
 const HourTable = function(props) {
@@ -22,8 +25,11 @@ const HourTable = function(props) {
     let line = props.isLineVisible ?
         <hr style={hrCss}/> : undefined;
 
+    let clearButton = props.isEqualVisible ?
+        <Button text="X" /> : undefined;
+
     return (
-        <table style={tableCss}>
+        <table style={getTableCss(props.isEqualVisible)}>
             <thead />
             <tbody>
                 <tr>
@@ -31,11 +37,15 @@ const HourTable = function(props) {
                     <td>
                         <DateDisplay dateStr={props.firstDate} />
                     </td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>
                         <HourDisplay text={props.firstOperand} />
+                    </td>
+                    <td>
+                        { clearButton }
                     </td>
                 </tr>
                 <tr>
@@ -49,6 +59,7 @@ const HourTable = function(props) {
                             textColor={props.secondRowColor}
                         />
                     </td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td colSpan='2'>{line}</td>
@@ -60,12 +71,14 @@ const HourTable = function(props) {
                     <td>
                         <HourDisplay text={props.result} textColor="blue" />
                     </td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>
                         <DateDisplay dateStr={props.resultDate} textColor="blue" />
                     </td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>
