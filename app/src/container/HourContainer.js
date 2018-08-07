@@ -3,6 +3,7 @@ import HourTable from '../components/HourTable';
 import Constants from '../utils/constants';
 import { getHourStrFromMillis } from '../utils/hour_utils';
 import { getFormattedDateStr } from '../utils/date_utils';
+import { clear } from '../actions/action_creators';
 
 class HourContainer extends React.Component {
 
@@ -91,6 +92,12 @@ class HourContainer extends React.Component {
         ) : currentState.resultDate;
     }
 
+    getClearOnClick() {
+        return (
+            () => this.props.store.dispatch(clear())
+        );
+    }
+
     render() {
 
         let secondRowColor = this.getSecondHourColor(
@@ -114,6 +121,7 @@ class HourContainer extends React.Component {
                 firstDate={this.getFirstDate(this.state)}
                 resultDate={this.getResultDate(this.state)}
                 isLineVisible={isEqualVisible}
+                clearOnClick={this.getClearOnClick()}
             />
         );
     }

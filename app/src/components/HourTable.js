@@ -26,7 +26,7 @@ const HourTable = function(props) {
         <hr style={hrCss}/> : undefined;
 
     let clearButton = props.isEqualVisible ?
-        <Button text="X" /> : undefined;
+        <Button text="X" onClick={props.clearOnClick} /> : undefined;
 
     return (
         <table style={getTableCss(props.isEqualVisible)}>

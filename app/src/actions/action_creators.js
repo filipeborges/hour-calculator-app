@@ -14,4 +14,10 @@ const addOperator = function(inputtedOperator) {
     };
 };
 
-export { addNumber, addOperator };
+const clear = function() {
+    return {
+        type: Actions.CLEAR_PRESSED
+    };
+};
+
+export { addNumber, addOperator, clear };

@@ -94,12 +94,18 @@ const handleInputtedOperator = function(currentState, inputValue) {
     return stateToReturn;
 }
 
+const handleInputtedClear = function() {
+    return initialState;
+};
+
 const reducer = function(state = {}, action) {
     switch(action.type) {
         case Actions.NUMBER_PRESSED:
             return handleInputtedNumber(state, action.value);
         case Actions.OPERATOR_PRESSED:
             return handleInputtedOperator(state, action.value);
+        case Actions.CLEAR_PRESSED:
+            return handleInputtedClear();
         default:
             return state;
     }
