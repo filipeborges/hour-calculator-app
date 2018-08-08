@@ -12,6 +12,7 @@ const getTableCss = function(isClearButtonVisible) {
     return {
         marginLeft: 'auto',
         marginRight: 'auto',
+        width: '18.8em',
         paddingRight: isClearButtonVisible ? undefined : '20px'
     };
 };
@@ -25,7 +26,7 @@ const HourTable = function(props) {
     let line = props.isLineVisible ?
         <hr style={hrCss}/> : undefined;
 
-    let clearButton = props.isEqualVisible ?
+    let clearButton = props.isClearVisible ?
         <Button text="X" onClick={props.clearOnClick} /> : undefined;
 
     return (
@@ -45,14 +46,21 @@ const HourTable = function(props) {
                         <HourDisplay text={props.firstOperand} />
                     </td>
                     <td>
-                        { clearButton }
+                        <span style={ { float: 'right' } }>
+                            { clearButton }
+                        </span>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <OperatorDisplay text={props.operator}
-                            textColor={props.secondRowColor} 
-                        />
+                        <span style={ { 
+                            width: '3em',
+                            display: 'inline-block'
+                         } }>
+                            <OperatorDisplay text={props.operator}
+                                textColor={props.secondRowColor} 
+                            />
+                        </span>
                     </td>
                     <td>
                         <HourDisplay text={props.secondOperand} 

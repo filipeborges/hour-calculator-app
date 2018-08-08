@@ -98,6 +98,10 @@ class HourContainer extends React.Component {
         );
     }
 
+    isClearVisible() {
+        return this.state.firstOperandValue.length > 0;
+    }
+
     render() {
 
         let secondRowColor = this.getSecondHourColor(
@@ -121,6 +125,7 @@ class HourContainer extends React.Component {
                 firstDate={this.getFirstDate(this.state)}
                 resultDate={this.getResultDate(this.state)}
                 isLineVisible={isEqualVisible}
+                isClearVisible={this.isClearVisible()}
                 clearOnClick={this.getClearOnClick()}
             />
         );
